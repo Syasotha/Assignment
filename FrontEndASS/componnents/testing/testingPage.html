@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>
+
+    </title>
+    <!-- Load AngularJS -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script type="text/javascript" src="testingController.js">
+
+
+    </script>
+    <style>
+        .button {
+            cursor: pointer;
+            color: blue;
+        }
+
+        td,
+        th {
+            border: 1px solid gray;
+            width: 25%;
+            text-align: left;
+        }
+
+        table {
+            width: 600px;
+        }
+    </style>
+
+    <head>
+
+    <body ng-app="UserManagement" ng-controller="UserManagementController">
+
+
+        <table>
+            <tr>
+                <th>Employee Id</th>
+                <th>Employee Name</th>
+                <th>Employee Salary</th>
+                <th>Employee Email</th>
+                <th>Project Name</th>
+            </tr>
+
+            <tr ng-repeat="employees in employee">
+                <td>{{ employees.id}}</td>
+                <td>{{ employees.employeeName}}</td>
+                <td>{{ employees.salary }}</td>
+                <td>{{ employees.email}}</td>
+                <td>{{ employees.projectId.id}}</td>
+                <td><a ng-click="editEmployee( employees )" class="button">Edit</a></td>
+                <td> <a ng-click="removeEmployee( employees )" class="button">Remove</a></td>
+            </tr>
+
+
+        </table>
+
+        <h2>Edit Employee</h2>
+
+        <form ng-submit="updateEmployee()">
+            <table>
+                <tr>
+                    <td>Employee Id:</td>
+                    <td><input type="text" ng-model="form.id" size="60" readonly /></td>
+                </tr>
+                <tr>
+                    <td>Employee Name</td>
+                    <td><input type="text" ng-model="form.employeeName" size="60" /></td>
+                </tr>
+                <tr>
+                    <td>Employee Salary</td>
+                    <td><input type="text" ng-model="form.salary" size="60" /></td>
+                </tr>
+                <tr>
+                    <td>Employee Email</td>
+                    <td><input type="text" ng-model="form.email" size="60" /></td>
+                </tr>
+                <tr>
+                    <td>Project Id</td>
+                    <td><input type="text" ng-model="form.projectId" size="60" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value="Submit" /></td>
+                </tr>
+            </table>
+        </form>
+
+    </body>
+
+</html>

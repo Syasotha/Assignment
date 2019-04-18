@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.rest.mapper.ProjectManagerMapper">
+
+	<resultMap type="com.example.rest.model.ProjectManager" id="ProjectManagerResult">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="email" column="email" />
+		<result property="contactNumber" column="contact_no" />
+	</resultMap>
+
+	<select id="findAll" resultMap="ProjectManagerResult">
+		SELECT * FROM projectmanager;
+	</select>
+
+	<insert id='insertProjectManager' parameterType='ProjectManager'
+		useGeneratedKeys='true' keyProperty='id'>
+		INSERT INTO projectmanager(id,
+		name, email,
+		contact_no)
+		VALUES(#{id}, #{name}, #{email},
+		#{contactNumber})
+	</insert>
+
+	<update id="updateProjectManager" parameterType="ProjectManager">
+		UPDATE
+		projectmanager
+		SET
+		name= #{name},
+		email = #{email},
+		contact_no
+		=#{contactNumber}
+		WHERE id = #{id}
+	</update>
+
+	<delete id='deleteProjectManager' parameterType='int'>
+		DELETE FROM
+		projectmanager WHERE id = #{projectManagerId}
+	</delete>
+
+	<select id='getProjectManagerById' parameterType='int'
+		resultType='com.example.rest.model.ProjectManager'>
+		SELECT
+		id as id,
+		name as name ,
+		email as email,
+		contact_no as
+		contactNumber
+		FROM projectmanager
+		WHERE id = #{id}
+	</select>
+
+	<select id="getProjectManager" parameterType="com.example.rest.model.ProjectManager"
+		resultMap="ProjectManagerResult">
+		select * from projectmanager where (id = #{id})
+		and (name =
+		#{name})
+		and (email = #{email} )
+		and (contact_no = #{contactNumber}
+		);
+	</select>
+
+</mapper>

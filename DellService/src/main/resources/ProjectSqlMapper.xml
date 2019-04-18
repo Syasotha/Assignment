@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.rest.mapper.ProjectMapper">
+
+	<resultMap type="com.example.rest.model.Project" id="ProjectResult">
+		<id property="id" column="project_id" />
+		<result property="projectName" column="project_name" />
+		<result property="location" column="project_location" />
+		<result property="managerId" column="manager_id" />
+		<association property="managerId" resultMap='ProjectManagerMapResult' />
+	</resultMap>
+
+	<resultMap type='com.example.rest.model.ProjectManager' id='ProjectManagerMapResult'>
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="email" column="email" />
+		<result property="contactNumber" column="contact_no" />
+	</resultMap>
+
+	<select id='getAllProject' resultMap='ProjectResult'>
+		SELECT
+		project.project_id,project.project_name, project.project_location,
+		projectmanager.id, projectmanager.name
+		FROM project LEFT OUTER JOIN
+		projectmanager ON project.manager_id=projectmanager.id
+	</select>
+
+	<select id="getProjectById" resultMap="ProjectResult">
+		SELECT
+		project.project_id,project.project_name, project.project_location,
+		projectmanager.id, projectmanager.name, projectmanager.email,
+		projectmanager.contact_no
+		FROM project LEFT OUTER JOIN
+		projectmanager ON
+		project.manager_id=projectmanager.id
+		WHERE
+		project.project_id=#{projectID}
+	</select>
+
+	<resultMap type="com.example.rest.model.AddProject" id="ProjectAddResult">
+		<id property="id" column="id" />
+		<result property="projectName" column="project_name" />
+		<result property="location" column="project_location" />
+		<result property="managerId" column="manager_id" />
+	</resultMap>
+
+	<insert id='addProjects' parameterType="com.example.rest.model.AddProject"
+		useGeneratedKeys='true' keyProperty='project_id'>
+		INSERT INTO project(project_id,
+		project_name, project_location,
+		manager_id)
+		VALUES(#{id},
+		#{projectName}, #{location},
+		#{managerId})
+	</insert>
+
+	<update id="updateProject" parameterType="com.example.rest.model.AddProject">
+		UPDATE
+		project
+		SET
+		project_name= #{projectName},
+		project_location = #{location},
+		manager_id
+		=#{managerId}
+		WHERE project_id = #{id}
+	</update>
+
+	<delete id='deleteProject' parameterType='int'>
+		DELETE FROM
+		project
+		WHERE project_id = #{projectId}
+	</delete>
+
+	<select id="getprojectByManagerId" resultMap="ProjectResult">
+		SELECT
+		project.project_id,project.project_name,
+		project.project_location,project.manager_id,projectmanager.id,projectmanager.name,
+		projectmanager.email,projectmanager.contact_no
+		FROM project
+		LEFT OUTER
+		JOIN
+		projectmanager ON
+		project.manager_id=projectmanager.id
+		WHERE
+		project.manager_id=#{managerId}
+	</select>
+
+
+</mapper>

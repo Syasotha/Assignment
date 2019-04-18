@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.rest.mapper.EmployeeMapper">
+	<resultMap type="com.example.rest.model.Employee" id="EmployeeResult">
+		<id property="id" column="employee_id" />
+		<result property="employeeName" column="emp_name" />
+		<result property="salary" column="emp_salary" />
+		<result property="email" column="emp_email" />
+		<association property="projectId" resultMap='ProjectMapResult' />
+	</resultMap>
+
+	<resultMap type='com.example.rest.model.Project' id='ProjectMapResult'>
+		<id property="id" column="project_id" />
+		<result property="projectName" column="project_name" />
+		<result property="location" column="project_location" />
+		<association property="managerId" resultMap='ProjectManagerMapResult' />
+	</resultMap>
+
+	<resultMap type='com.example.rest.model.ProjectManager' id='ProjectManagerMapResult'>
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="email" column="email" />
+		<result property="contactNumber" column="contact_no" />
+	</resultMap>
+
+	<select id='getAllEmployee' resultMap='EmployeeResult'>
+		SELECT *
+		FROM
+		employee
+		JOIN
+		project
+		JOIN
+		projectmanager
+		ON
+		employee.project_id=project.project_id AND
+		project.manager_id = projectmanager.id
+	</select>
+
+	<select id="getEmployeeById" resultMap="EmployeeResult">
+		SELECT
+		*
+		FROM
+		employee
+		JOIN
+		project
+		JOIN
+		projectmanager
+		ON
+		employee.project_id=project.project_id AND
+		project.manager_id = projectmanager.id
+		WHERE
+		employee.employee_id=#{employeeId}
+	</select>
+
+	<resultMap type="com.example.rest.model.AddEmployee" id="EmployeeAddResult">
+		<id property="id" column="id" />
+		<result property="projectName" column="project_name" />
+		<result property="location" column="project_location" />
+		<result property="managerId" column="manager_id" />
+	</resultMap>
+
+	<insert id='addEmployee' parameterType="com.example.rest.model.AddEmployee"
+		useGeneratedKeys='true' keyProperty='employee_id'>
+		INSERT INTO employee(employee_id,
+		emp_name, emp_salary,
+		emp_email,project_id)
+		VALUES(#{id},
+		#{employeeName}, #{salary},
+		#{email}, #{projectId})
+	</insert>
+
+	<update id="updateEmployee" parameterType="com.example.rest.model.AddEmployee">
+		UPDATE
+		employee
+		SET
+		emp_name= #{employeeName},
+		emp_salary = #{salary},
+		emp_email = #{email},
+		project_id
+		=#{projectId}
+		WHERE employee_id = #{id}
+	</update>
+
+	<delete id='deleteEmployee' parameterType='int'>
+		DELETE FROM
+		employee
+		WHERE employee_id = #{id}
+	</delete>
+
+	<resultMap type="com.example.rest.model.Employee" id="EmployeeResult1">
+		<id property="id" column="employee_id" />
+		<result property="employeeName" column="emp_name" />
+		<result property="salary" column="emp_salary" />
+		<result property="email" column="emp_email" />
+		<result property="projectId" column="project_id" />
+		<association property="projectId" resultMap='ProjectMapResult' />
+	</resultMap>
+
+	<select id="getEmployeeByProjectId" resultMap="EmployeeResult1">
+		SELECT
+		*
+		FROM
+		employee
+		JOIN
+		project
+		JOIN
+		projectmanager
+		ON
+		employee.project_id=project.project_id AND
+		project.manager_id = projectmanager.id
+		WHERE
+		employee.project_id=#{projectId}
+	</select>
+
+
+	<select id="getEmployeeByManagerId" resultMap="EmployeeResult">
+		SELECT
+		*
+		FROM
+		employee
+		JOIN
+		project
+		JOIN
+		projectmanager
+		ON
+		employee.project_id=project.project_id AND
+		project.manager_id = projectmanager.id
+		WHERE
+		project.manager_id=#{managerId}
+	</select>
+
+
+</mapper>

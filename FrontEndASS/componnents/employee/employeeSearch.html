@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>employeeSearch</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Load AngularJS -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="employeeController.js"></script>
+</head>
+
+<body ng-app="UserManagement" ng-controller="UserManagementController">
+
+    <div class="container">
+        <h5>Employee Details</h5>
+        <p></p>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Employee Id</th>
+                    <th>Employee Name</th>
+                    <th>Employee Salary</th>
+                    <th>Employee Email</th>
+                    <th>Project Name</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <tr ng-repeat="employees in employee">
+                    <td>{{ employees.id}}</td>
+                    <td>{{ employees.employeeName}}</td>
+                    <td>{{ employees.salary }}</td>
+                    <td>{{ employees.email}}</td>
+                    <td>{{ employees.projectId.projectName}}</td>
+                    <td>
+                        <button class="btn btn-warning" title="Edit"><span
+                                class="glyphicon glyphicon-edit"></span></button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" title="Delete"><span
+                                class="glyphicon glyphicon-trash"></span></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>
