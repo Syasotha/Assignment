@@ -9,9 +9,59 @@
         box-sizing: border-box;
     }
 
+    /* Full-width input fields */
+    select,
+    input[type=text],
+    input[type=password] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    /* Add a background color when the inputs get focus */
+    input[type=text]:focus,
+    input[type=password]:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+
+    /* Set a style for all buttons */
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 10px 10px;
+        border: none;
+        cursor: pointer;
+        width: 50%;
+        opacity: 0.9;
+    }
+
+    button:hover {
+        opacity: 1;
+    }
+
+    /* Extra styles for the cancel button */
+    .cancelbtn {
+        padding: 14px 20px;
+        background-color: #f44336;
+        float: unset;
+        width: 30%;
+    }
+
+    /* Float cancel and signup buttons and add an equal width */
+    /* .cancelbtn, */
+    .signupbtn {
+        float: right;
+        width: 30%;
+    }
+
     /* Add padding to container elements */
     .container {
-        padding: 16 px;
+        padding: 16px;
     }
 
     /* The Modal (background) */
@@ -73,6 +123,15 @@
         display: table;
     }
 
+    /* Change styles for cancel button and signup button on extra small screens */
+    @media screen and (max-width: 300px) {
+
+        .cancelbtn,
+        .signupbtn {
+            width: 100%;
+        }
+    }
+
     .bg-img {
         /* The image used */
         background-image: url("background.jpg");
@@ -84,64 +143,6 @@
         background-repeat: no-repeat;
         background-size: cover;
         position: relative;
-    }
-
-    table.blueTable {
-        border: 1px solid #1C6EA4;
-        background-color: #EEEEEE;
-        width: 100%;
-        text-align: left;
-        border-collapse: collapse;
-    }
-
-    table.blueTable td,
-    table.blueTable th {
-        border: 1px solid #AAAAAA;
-        padding: 5px 5px;
-    }
-
-    table.blueTable tbody td {
-        font-size: 13px;
-    }
-
-    table.blueTable tr:nth-child(even) {
-        background: #D0E4F5;
-    }
-
-    table.blueTable thead {
-        background: #1C6EA4;
-        background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-        background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-        background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-        border-bottom: 2px solid #444444;
-    }
-
-    table.blueTable thead th {
-        font-size: 15px;
-        font-weight: bold;
-        color: #FFFFFF;
-        text-align: center;
-        border-left: 2px solid #D0E4F5;
-    }
-
-    table.blueTable thead th:first-child {
-        border-left: none;
-    }
-
-    table.blueTable tfoot td {
-        font-size: 14px;
-    }
-
-    table.blueTable tfoot .links {
-        text-align: right;
-    }
-
-    table.blueTable tfoot .links a {
-        display: inline-block;
-        background: #1C6EA4;
-        color: #FFFFFF;
-        padding: 2px 8px;
-        border-radius: 5px;
     }
 </style>
 
@@ -162,17 +163,15 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <!-- Load AngularJS -->
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script type="text/javascript" src="employeeController.js"></script>
 
-    <!-- <link rel="stylesheet" type="text/css" href="/employee table.css"> -->
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script type="text/javascript" src="employeeController.js"></script>
-    <title>Register</title>
+    <title>AddEmployee</title>
 </head>
 
 <body class="bg-img" ng-app="UserManagement" ng-controller="UserManagementController">
@@ -186,46 +185,42 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="#">Employee</a>
+                <a class="nav-item nav-link active" href="/index.html">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="employeeSearch.html">Employee</a>
                 <a class="nav-item nav-link" href="#">Project</a>
                 <a class="nav-item nav-link disabled" href="#">Project Manager</a>
             </div>
         </div>
     </nav>
 
-    
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-8">
-                <form id="myForm" class="modal-content" action="/action_page.php">
-                    <table class="blueTable">
-                        <thead>
-                            <tr>
-                                <th>Employee Id</th>
-                                <th>Employee Name</th>
-                                <th>Employee Salary</th>
-                                <th>Employee Email</th>
-                                <th>Project Id</th>
-                                <th>Project Name</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="employees in employee">
-                                <td>{{ employees.id}}</td>
-                                <td>{{ employees.employeeName}}</td>
-                                <td>{{ employees.salary }}</td>
-                                <td>{{ employees.email}}</td>
-                                <td>{{ employees.projectId.id}}</td>
-                                <td>{{ employees.projectId.projectName}}</td>
-                                <td><a ng-click="editEmployee( employees )" class="button">Edit</a></td>
-                                <td> <a ng-click="removeEmployee( employees )" class="button">Remove</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+                <form id="myForm" class="modal-content" ng-submit="submitEmployee()">
+                    <div class="container">
+                        <h5>Employee</h5>
+
+                        <hr>
+                        <label for="name"><b>Name</b></label>
+                        <input type="text" placeholder="Enter Name" name="name" ng-model="form.employeeName" required>
+
+                        <label for="salary"><b>Salary</b></label>
+                        <input type="text" placeholder="Enter Salary" name="email" ng-model="form.salary" required>
+
+                        <label for="project_id"><b>Project Name</b></label>
+                        <select name="projectName">
+                            <option ng-model="projectId" ng-repeat="employees in employee" value="{{ employees.projectId.id}}">{{ employees.projectId.projectName}}</option>
+                          </select>
+
+                        <label for="email"><b>Email</b></label>
+                        <input type="text" placeholder="Enter Email" name="email" ng-model="form.email" required>
+
+                        <div class="clearfix">
+                            <button type="button" onclick="myFunction()" class="cancelbtn">Clear</button>
+                            <button type="submit" class="signupbtn">Add</button>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="col-sm-3"></div>

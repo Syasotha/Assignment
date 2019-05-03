@@ -8,10 +8,7 @@
     </title>
     <!-- Load AngularJS -->
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script type="text/javascript" src="testingController.js">
-
-
-    </script>
+    <script type="text/javascript" src="testingController.js"></script>
     <style>
         .button {
             cursor: pointer;
@@ -50,6 +47,7 @@
                 <td>{{ employees.salary }}</td>
                 <td>{{ employees.email}}</td>
                 <td>{{ employees.projectId.id}}</td>
+                <td>{{ employees.projectId.projectName}}</td>
                 <td><a ng-click="editEmployee( employees )" class="button">Edit</a></td>
                 <td> <a ng-click="removeEmployee( employees )" class="button">Remove</a></td>
             </tr>
@@ -79,7 +77,7 @@
                 </tr>
                 <tr>
                     <td>Project Id</td>
-                    <td><input type="text" ng-model="form.projectId" size="60" /></td>
+                    <td><input type="text" ng-model="form.projectId.id" size="60" /></td>
                 </tr>
                 <tr>
                     <td colspan="2"><input type="submit" value="Submit" /></td>

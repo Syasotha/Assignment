@@ -5,7 +5,7 @@ app.controller("UserManagementController", function ($scope, $http) {
     //Initialize page with default data which is blank in this example
     $scope.employees = [];
     $scope.form = {
-        id: "",
+        employeeId: "",
         employeeName: "",
         salary: "",
         email: "",
@@ -36,6 +36,7 @@ app.controller("UserManagementController", function ($scope, $http) {
         $scope.form.salary = employee.salary;
         $scope.form.email = employee.email;
         $scope.form.projectId = employee.projectId.id;
+        // $scope.form.projectId = employee.projectId;
         $scope.form.id = employee.id;
     };
 

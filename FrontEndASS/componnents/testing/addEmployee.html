@@ -34,14 +34,14 @@
 
     <body ng-app="UserManagement" ng-controller="UserManagementController">
 
-        <h2>Add/Edit Employee</h2>
+        <h2>Add Employee</h2>
 
         <form ng-submit="submitEmployee()">
             <table>
                 <tr>
                     <td>Employee Id:</td>
-                    <td><input type="text" ng-model="form.id" size="60" /></td>
-                </tr>
+                    <td><input type="text" ng-model="form.employeeId" size="60" /></td>
+                    
                 <tr>
                     <td>Employee Name</td>
                     <td><input type="text" ng-model="form.employeeName" size="60" /></td>
