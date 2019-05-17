@@ -33,7 +33,7 @@
 		JOIN
 		projectmanager
 		ON
-		employee.project_id=project.project_id AND
+		employee.p_id=project.project_id AND
 		project.manager_id = projectmanager.id
 	</select>
 
@@ -47,24 +47,25 @@
 		JOIN
 		projectmanager
 		ON
-		employee.project_id=project.project_id AND
+		employee.p_id=project.project_id AND
 		project.manager_id = projectmanager.id
 		WHERE
 		employee.employee_id=#{employeeId}
 	</select>
 
 	<resultMap type="com.example.rest.model.AddEmployee" id="EmployeeAddResult">
-		<id property="id" column="id" />
-		<result property="projectName" column="project_name" />
-		<result property="location" column="project_location" />
-		<result property="managerId" column="manager_id" />
+		<id property="id" column="employee_id" />
+		<result property="employeeName" column="emp_name" />
+		<result property="salary" column="emp_salary" />
+		<result property="email" column="emp_email" />
+		<result property="projectId" column="p_id" />
 	</resultMap>
 
 	<insert id='addEmployee' parameterType="com.example.rest.model.AddEmployee"
 		useGeneratedKeys='true' keyProperty='employee_id'>
 		INSERT INTO employee(employee_id,
 		emp_name, emp_salary,
-		emp_email,project_id)
+		emp_email,p_id)
 		VALUES(#{id},
 		#{employeeName}, #{salary},
 		#{email}, #{projectId})
@@ -77,7 +78,7 @@
 		emp_name= #{employeeName},
 		emp_salary = #{salary},
 		emp_email = #{email},
-		project_id
+		p_id
 		=#{projectId}
 		WHERE employee_id = #{id}
 	</update>
@@ -93,7 +94,7 @@
 		<result property="employeeName" column="emp_name" />
 		<result property="salary" column="emp_salary" />
 		<result property="email" column="emp_email" />
-		<result property="projectId" column="project_id" />
+		<result property="projectId" column="p_id" />
 		<association property="projectId" resultMap='ProjectMapResult' />
 	</resultMap>
 
@@ -107,10 +108,11 @@
 		JOIN
 		projectmanager
 		ON
-		employee.project_id=project.project_id AND
-		project.manager_id = projectmanager.id
+		employee.p_id=project.project_id AND
+		project.manager_id =
+		projectmanager.id
 		WHERE
-		employee.project_id=#{projectId}
+		employee.p_id=#{projectId}
 	</select>
 
 
@@ -124,8 +126,9 @@
 		JOIN
 		projectmanager
 		ON
-		employee.project_id=project.project_id AND
-		project.manager_id = projectmanager.id
+		employee.p_id=project.project_id AND
+		project.manager_id =
+		projectmanager.id
 		WHERE
 		project.manager_id=#{managerId}
 	</select>

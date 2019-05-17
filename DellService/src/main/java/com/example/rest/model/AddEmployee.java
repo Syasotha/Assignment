@@ -1,10 +1,8 @@
 package com.example.rest.model;
 
-import javax.validation.constraints.NotNull;
-
 public class AddEmployee {
 	
-	@NotNull(message = "Name cannot be null")
+//	@NotNull(message = "Name cannot be null")
 	private int id;
 	private String employeeName;
 	private String salary;
